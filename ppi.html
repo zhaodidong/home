@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>PPI DPI 计算器</title>
+        <style>
+            input[type=range] {
+                width:800px;
+            }
+            input[type=range]:before {
+                content: attr(min);
+            }
+            input[type=range]:after {
+                content: attr(max);
+            }
+        </style>
+    </head>
+    
+    <body>
+       宽 <input type="range" id="a" min="240" max="1080" step="20" value="320">
+        <input type="text" id="a0">
+        <br />
+       高 <input type="range" id="b" min="320" max="1920" step="20" value="480">
+        <input type="text" id="b0">
+        <br />
+       尺寸 <input type="range" id="d" min="2" max="11" step="0.1" value="3.6">
+        <input type="text" id="d0">
+        <br />
+       对角线 <input type="text" id="c0">
+       PPI <input type="text" id="c1">
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script>  
+  		bb();
+            function aa(a, b) {
+                return Math.sqrt(a * a + b * b)
+            }
+            function bb() {
+				$('#a0').val($('#a').val());
+				$('#b0').val($('#b').val());
+				$('#d0').val($('#d').val());				
+                cc();
+            };
+			function cc(){
+				$('#c0').val(aa($('#a0').val(), $('#b0').val()));
+                $('#c1').val($('#c0').val() / $('#d0').val());
+			}
+            $('#a,#b,#d').change(function () {
+                bb();
+            });
+			$('#a0,#b0,#d0').keyup(function(){
+				cc();
+			});
+        </script>
+    </body>
+
+</html>
